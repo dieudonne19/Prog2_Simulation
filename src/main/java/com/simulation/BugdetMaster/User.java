@@ -41,6 +41,17 @@ public class User {
         return total;
     }
 
+    public double getRemainingBudget() {
+        int currentMonth = LocalDate.now().getMonthValue();
+        double totalExpenseValue = 0.0;
+        for (Expense e : this.expenseList) {
+            if (e.getDate().getMonthValue() == currentMonth) {
+                totalExpenseValue += e.getAmount();
+            }
+        }
+        return this.monthlyBudget - totalExpenseValue;
+    }
+
 
 
 
