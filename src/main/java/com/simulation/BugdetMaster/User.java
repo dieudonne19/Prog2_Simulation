@@ -4,31 +4,43 @@ import java.util.List;
 
 public class User {
     private String name;
-    private double budget;
-    private List<Spent> spentList;
+    private double monthlyBudget;
+    private List<Expense> expenseList;
 
-    public User(String name, double budget, List<Spent> spentList) {
+    public User(String name, double monthlyBudget, List<Expense> expenseList) {
         this.name = name;
-        this.budget = budget;
-        this.spentList = spentList;
+        this.monthlyBudget = monthlyBudget;
+        this.expenseList = expenseList;
     }
+
+
+    public void addExpense (Expense newExpense){
+        if (newExpense.getAmount() < 0) {
+            System.out.println("Expense amount must be a positive number");
+        }
+        this.expenseList.add(newExpense);
+    }
+
+    public List<Expense> getExpenseByCategory(Categories category) {
+        return (List<Expense>) this.expenseList.stream().filter(expense -> expense.getCategory() == category);
+    }
+
+
 
     public String getName() {
         return name;
     }
 
-    public double getBudget() {
-        return budget;
+    public double getMonthlyBudget() {
+        return monthlyBudget;
     }
-
-
 
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
-                ", budget=" + budget +
-                ", spentList=" + spentList +
+                ", budget=" + monthlyBudget +
+                ", spentList=" + expenseList +
                 '}';
     }
 }

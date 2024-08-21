@@ -2,13 +2,13 @@ package com.simulation.BugdetMaster;
 
 import java.time.LocalDate;
 
-public class Spent {
+public class Expense {
     private String description;
     private double amount;
     private Categories category;
     private LocalDate date;
 
-    public Spent(String description, double amount, Categories category, LocalDate date) {
+    public Expense(String description, double amount, Categories category, LocalDate date) {
         this.description = description;
         this.amount = amount;
         this.category = category;
