@@ -1,6 +1,9 @@
 package com.simulation.BugdetMaster;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Stream;
 
 public class User {
     private String name;
@@ -22,8 +25,22 @@ public class User {
     }
 
     public List<Expense> getExpenseByCategory(Categories category) {
-        return (List<Expense>) this.expenseList.stream().filter(expense -> expense.getCategory() == category);
+        return this.expenseList.stream().filter(expense -> expense.getCategory() == category).toList();
     }
+
+    public double getTotalSpentThisMonth() {
+
+        double total = 0.0;
+        int currentMonth = LocalDate.now().getMonthValue();
+
+        List<Expense> expenseFiltered = this.expenseList
+                .stream().filter(expense -> expense.getDate().getMonthValue() == currentMonth).toList();
+        for (Expense expense : expenseFiltered) {
+            total += expense.getAmount();
+        }
+        return total;
+    }
+
 
 
 
